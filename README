@@ -1,0 +1,14 @@
+README file for Module::Info::File
+
+$Id: README,v 1.1 2003/09/28 09:25:04 jonasbn Exp $
+
+In the beginning I was using Module::Info, but due to a lacking
+functionality in this module I created Module::Info::File, which
+inherits from Module::Info and replaces the B<new_from_file> method so
+the lacking data can be accessed. Apart from that you can use all the
+neat accessors from Module::Info.
+
+In the bin folder in this distibution is a small script called
+version.pl, which was the beginning of everything.
+
+jonasbn, Copenhagen, Sun Sep 28 11:23:58 CEST 2003

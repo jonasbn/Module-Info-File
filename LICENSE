@@ -1,0 +1,9 @@
+License for Module::Info::File
+
+$Id: LICENSE,v 1.1 2003/09/28 08:42:39 jonasbn Exp $
+
+Module::Info::File and related modules are free software and is
+released under the Artistic License. See
+<http://www.perl.com/language/misc/Artistic.html> for details.
+
+Module::Info::File is (C) 2003 Jonas B. Nielsen (jonasbn) <jonasbn@cpan.org>
