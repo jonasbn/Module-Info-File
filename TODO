@@ -1,0 +1,7 @@
+TODO file for Module::Info::File
+
+$Id: TODO,v 1.1 2003/10/01 16:42:00 jonasbn Exp $
+
+- Add teaser line to module POD NAME section
+
+- Rewrite docs

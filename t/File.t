@@ -1,10 +1,11 @@
 #!/usr/bin/perl -w
 
-# $Id: File.t,v 1.2 2003/09/28 09:19:47 jonasbn Exp $
+# $Id: File.t,v 1.3 2003/11/03 20:38:33 jonasbn Exp $
 
 use strict;
 use Data::Dumper;
 use Test::More tests => 7;
+use File::Basename;
 use lib qw(lib);
 
 my $verbose = 0;
@@ -30,7 +31,10 @@ like($mod->version, qr/\d+\.\d+/, 'Testing the version');
 print STDERR "Version = ".$mod->version."\n" if $verbose;
 
 #test 6
-like($mod->file, qr/$path/, 'Testing the file');
+my ($name,$v,$suffix) = fileparse($path,"\.pm");
+fileparse_set_fstype($^O);
+
+like($mod->file, qr/$name$suffix/, 'Testing the file');
 print STDERR "File = ".$mod->file."\n" if $verbose;
 
 #test 7

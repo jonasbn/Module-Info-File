@@ -1,0 +1,19 @@
+CHANGES file for Module::Info::File
+
+$Id: CHANGES,v 1.3 2003/11/03 20:38:33 jonasbn Exp $
+
+0.01 Released 30th. September 2003
+
+Initial revision
+
+0.02 Released 3rd. November 2003
+
+- Added TODO file
+
+- Added Changes file (this file)
+
+- Added description to NAME section
+
+- Added use of File::Basename to make test on Win32 work
+
+- Fixed bug (rt: #4147) - broken tests on Win32

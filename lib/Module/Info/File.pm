@@ -1,12 +1,12 @@
 package Module::Info::File;
 
-# $Id: File.pm,v 1.3 2003/09/28 09:19:47 jonasbn Exp $
+# $Id: File.pm,v 1.5 2003/11/03 20:38:33 jonasbn Exp $
 
 use strict;
 use Module::Info;
 use vars qw(@ISA $VERSION);
 
-$VERSION = '0.01';
+$VERSION = '0.02';
 @ISA = qw(Module::Info);
 
 sub new_from_file {
@@ -40,11 +40,13 @@ __END__
 
 =head1 NAME
 
-Module::Info::File
+Module::Info::File - A class inherting from Module::Info
 
 =cut
 
 =head1 SYNOPSIS
+
+use Module::Info::File;
 
 my $module = Module::Info::File->new_from_file('path/to/Some/Module.pm');
 

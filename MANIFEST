@@ -6,3 +6,6 @@ bin/version.pl
 lib/Module/Info/File.pm
 t/File.t
 t/Info.t
+t/pod.t
+TODO
+CHANGES
