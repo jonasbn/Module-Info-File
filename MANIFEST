@@ -7,9 +7,8 @@ Makefile.PL
 MANIFEST			This list of files
 META.yml			Module meta-data (added by MakeMaker)
 README
+t/00_load.t
 t/File.t
 t/Info.t
-t/MultiPackage.pm
-t/MultiPackage.t
 t/pod.t
 TODO

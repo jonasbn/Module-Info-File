@@ -1,32 +1,58 @@
 CHANGES file for Module::Info::File
 
-$Id: CHANGES 1433 2004-09-19 17:00:09Z jonasbn $
+$Id: CHANGES 1504 2004-11-13 16:01:35Z jonasbn $
 
-0.01 Released 30th. September 2003
+0.08 Released 13th. of November 2004
 
-Initial revision
+ - Improved the VERSION locating regular expression
 
-0.02 Released 3rd. November 2003
+ - Added use of Carp (also added in Makefile.PL)
 
-- Added TODO file
+ - Added t/00_load.t
 
-- Added Changes file (this file)
+ - Removed Multipackage files (no longer at part of the distribution)
 
-- Added description to NAME section
+ - new_from_file no longer supports list context, I have readded this to the 
+   TODO, since the implementation in 0.07 was not good, so multiple
+   package definitions in files are no longer handled.
 
-- Added use of File::Basename to make test on Win32 work
+ - Fixed serious bug in the setting of the version number, this bug only occurred 
+   on Linux boxes running Perl 5.8.4.
 
-- Fixed bug (rt: #4147) - broken tests on Win32
+ - Added some better exception handling to the version.pl script
 
-0.03 Released 20th. December 20 2003
+ - Added some more debug information to the version.pl script
 
-- POD cleaned and reviewed by Rias.
+ - Turned this CHANGES file upside down
 
-- ACKNOWLEDGE section added
+ - Added CPAN testers to the ACKNOWLEDGE section
 
-- Added information to t/Info.t so if the Module::Info tests fail, the
-  test asks the tester to mail me the information
+ - Added version_bug.t to t/ (not in distribution)
+
+0.07 Released 19th. of September 2004
+
+- Added list context for constructor (new_from_file)
+
+- bin/version.pl updated to accomodate this
+
+0.06 Released 23rd. of July 2004
+
+- Patched with patch from LTHEGLER, should now work under 5.005_03, open was
+  using the unecessary 3 arguments instead of just two.
+
+0.05 Released 28th. of February 2004
+
+- Updated bin/version.pl with POD required to have the script in the
+  CPAN scripts directory (http://www.cpan.org/scripts/). The script was
+  uploaded alone to PAUSE together with the release of 0.04
+
+- Added handling of directories so it is possible to get version numbers of 
+  all perl modules in a directory recursively with bin/version.pl
   
+- Added INSTALL file
+
+- Makefile.PL had a makeover
+
 0.04 Released 10th. January 2004
 
 - Updated bin/version.pl updated with error handling
@@ -43,26 +69,28 @@ Initial revision
 
 - Added a warning in the case where script is not a .pl or .pm
 
-0.05 Released 28th. of February 2004
+0.03 Released 20th. December 20 2003
 
-- Updated bin/version.pl with POD required to have the script in the
-  CPAN scripts directory (http://www.cpan.org/scripts/). The script was
-  uploaded alone to PAUSE together with the release of 0.04
+- POD cleaned and reviewed by Rias.
 
-- Added handling of directories so it is possible to get version numbers of 
-  all perl modules in a directory recursively with bin/version.pl
-  
-- Added INSTALL file
+- ACKNOWLEDGE section added
 
-- Makefile.PL had a makeover
+- Added information to t/Info.t so if the Module::Info tests fail, the
+  test asks the tester to mail me the information
 
-0.06 Released 23rd. of July 2004
+0.02 Released 3rd. November 2003
 
-- Patched with patch from LTHEGLER, should now work under 5.005_03, open was
-  using the unecessary 3 arguments instead of just two.
+- Added TODO file
 
-0.07 Released 19th. of September 2004
+- Added Changes file (this file)
 
-- Added list context for constructor (new_from_file)
+- Added description to NAME section
 
-- bin/version.pl updated to accomodate this
+- Added use of File::Basename to make test on Win32 work
+
+- Fixed bug (rt: #4147) - broken tests on Win32
+
+0.01 Released 30th. September 2003
+
+Initial revision
+

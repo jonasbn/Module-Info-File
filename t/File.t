@@ -1,17 +1,17 @@
 #!/usr/bin/perl -w
 
-# $Id: File.t 1431 2004-09-19 15:59:00Z jonasbn $
+# $Id: File.t 1501 2004-11-13 15:56:14Z jonasbn $
 
 use strict;
 use Data::Dumper;
-use Test::More tests => 20;
+use Test::More tests => 12;
 use File::Basename;
 use lib qw(lib);
 
 my $verbose = 0;
 
 #test 1
-use_ok('Module::Info::File');
+BEGIN { use_ok('Module::Info::File'); }
 
 my $path = 'lib/Module/Info/File.pm';
 my $mod = Module::Info::File->new_from_file($path);
@@ -44,12 +44,12 @@ print STDERR "Dir = ".$mod->inc_dir."\n" if $verbose;
 print STDERR Dumper $mod if $verbose;
 
 #test 8
-$path = 't/MultiPackage.pm';
+$path = 'lib/Module/Info/File.pm';
 my @mods = Module::Info::File->new_from_file($path);
 
-is(scalar @mods, 3, 'Testing the count of values returned on list context');
+is(scalar @mods, 1, 'Testing the count of values returned on list context');
 
-#test 9-21
+#test 9-12
 {
 	foreach my $m (@mods) {
 		like($m->name, qr/\w+/, 'Testing the name');

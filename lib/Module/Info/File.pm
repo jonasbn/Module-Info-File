@@ -1,65 +1,51 @@
 package Module::Info::File;
 
-# $Id: File.pm 1433 2004-09-19 17:00:09Z jonasbn $
+# $Id: File.pm 1501 2004-11-13 15:56:14Z jonasbn $
 
 use strict;
 use Module::Info;
+use Carp;
 use File::Spec;
 use File::Basename qw(fileparse);
 use vars qw(@ISA $VERSION);
 
-$VERSION = '0.07';
+$VERSION = '0.08';
 @ISA = qw(Module::Info);
 
 sub new_from_file {
     my ($proto, $file) = @_;
 
-    return unless -r $file;
+	open(FIN, "<$file") or croak "Unable to open file: $file - $!";
 
-	open(FIN, "<$file") or warn "Unable to open file: $file - $!";
-
-	my (@packages, $package, $version, $name, $dir);
+	my (@packages, $version, $name, $dir);
 	while (<FIN>) {
-		#my ($filename, $suffix, $v);
-		
-		if (($package) = $_ =~ m/^package ([A-Za-z0-9_:]+);/) {
-			if ($package) {
-				$name = $package;
+		if ($_ =~ m/^package ([A-Za-z0-9_:]+);/) {
+			if ($1) {
+				$name = $1;
 			} else {
 				($name) = $file =~ m/(\w+\.pm)$/;
 			}
-		
-			#if ($file =~ m/\.pl$/) {
-			#	($filename,$v,$suffix) = fileparse($file,"\.pl");
-			#} elsif ($file =~ m/\.pm$/) {
-			#	($filename,$v,$suffix) = fileparse($file,"\.pm");
-			#}
-
-			$dir = File::Spec->rel2abs($file);
-			$dir =~ s[/(\w+\.p(m|l))$][];
-
 		}
-		if ((my ($v) = $_ =~ m/VERSION = '*([0-9_.]+)'*;/)) {
-			$version = $v || 'N/A';
+		$dir = File::Spec->rel2abs($file);
+		$dir =~ s[/(\w+\.p(m|l))$][];
+
+		if ($_ =~ m/\bVERSION\b.*=.* '*([0-9_.]+)'*;/) {
+			$version = $1;
+		}
+			
+		if ($name and $dir and $file and $version) {
+			last;
 		}
 
-		push @packages, __PACKAGE__->new_from_data(
-			name    => $name,
-			dir     => $dir,
-			file    => $file,
-			version => ($version eq 'N/A')?undef:$version,
-		) if ($name and $dir and $file and $version);
-
-		$package = '';
-		$version = '';
 	}
 	close(FIN);
 
-	if (wantarray) {
-		return @packages;
-	} else {
-		return pop @packages;
-	}
+	return __PACKAGE__->new_from_data(
+		name    => $name,
+		dir     => $dir,
+		file    => $file,
+		version => $version?$version:undef,
+	);
 }
 
 sub new_from_data {
@@ -69,6 +55,10 @@ sub new_from_data {
 
 	foreach (keys %params) {
 		$self->{$_} = $params{$_} || undef;
+	}
+
+	if (! $self->{'version'}) {
+		$self->{'version'} = $self->version();
 	}
 
 	return $self;
@@ -110,14 +100,6 @@ Module::Info::File - retrieves module information from a file or script
 	$mod->file();
 	
 	$mod->inc_dir();
-	
-	use Module::Info::File;
-	
-	my @modules = Module::Info::File->new_from_file('path/to/Some/Module.pm');
-
-	foreach my $mod (@modules) {
-		print $mod->name() . "\n";
-	}
 
 =head1 DESCRIPTION
 
@@ -141,17 +123,11 @@ the object:
 
 =over 4
 
-=item *
+=item * name
 
-name
+=item * dir
 
-=item *
-
-dir
-
-=item *
-
-file
+=item * file
 
 =back
 
@@ -163,22 +139,14 @@ was the starting point for this module.
 
 =over 4
 
-=item *
+=item * name, returns the package name of the file.
 
-name, returns the package name of the file.
-
-=item *
-
-version, returns the version number of the module/file in question
+=item * version, returns the version number of the module/file in question
 ($VERSION).
 
-=item *
+=item * inc_dir, returns the dir attribute
 
-inc_dir, returns the dir attribute
-
-=item *
-
-file, returns the file attribute
+=item * file, returns the file attribute
 
 =back
 
@@ -197,13 +165,9 @@ Module::Info::File will be obsolete and can be discontinued.
 
 =over 4
 
-=item * 
+=item * Module::Info, by Mattia Barbon
 
-Module::Info, by Mattia Barbon
-
-=item *
-
-bin/version.pl
+=item * bin/version.pl
 
 =back
 
@@ -238,6 +202,11 @@ Mattia Barbon (MBARBON), for writing Module::Info
 =item *
 
 bigj at Perlmonks who mentioned Module::Info
+
+=item *
+
+All the CPAN testers, who help you to have your stuff tested on platforms not
+necessarily available to a module author.
 
 =back
 

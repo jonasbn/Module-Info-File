@@ -1,5 +1,5 @@
 TODO file for Module::Info::File
 
-$Id: TODO 1072 2003-12-18 19:45:52Z jonasbn $
+$Id: TODO 1501 2004-11-13 15:56:14Z jonasbn $
 
-- Nothing to do?
+- Reimplement list context from version 0.07, which was removed in 0.08

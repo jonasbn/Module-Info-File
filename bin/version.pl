@@ -1,14 +1,16 @@
 #!/usr/bin/perl -w
 
-# $Id: version.pl 1433 2004-09-19 17:00:09Z jonasbn $
+# $Id: version.pl 1501 2004-11-13 15:56:14Z jonasbn $
 
 use strict;
 use File::Find;
 use Module::Info::File;
+use UNIVERSAL qw(can isa);
 use Data::Dumper;
+use diagnostics;
 use vars qw($VERSION);
 
-$VERSION = '0.04';
+$VERSION = '0.05';
 
 my $debug = 0;
 my $modulepath;
@@ -21,11 +23,13 @@ if ($ARGV[0]) {
 
 my @ms;
 if ($modulepath =~ m/::/) {
+	print STDERR "Using new_from_module\n" if $debug;
 	@ms = Module::Info::File->new_from_module($modulepath);
 	foreach my $m (@ms) {
 		long($m);
 	}
 } elsif (-f $modulepath) {
+	print STDERR "Using new_from_file\n" if $debug;
 	@ms = Module::Info::File->new_from_file($modulepath);
 	foreach my $m (@ms) {
 		long($m);
@@ -33,9 +37,18 @@ if ($modulepath =~ m/::/) {
 } elsif (-d $modulepath) {
 	find(\&simple, $modulepath);
 } else {
+	print STDERR "Falling back to new_from_module\n" if $debug;
 	@ms = Module::Info::File->new_from_module($modulepath);
 	foreach my $m (@ms) {
 		long($m);
+	}
+}
+
+unless(scalar(@ms)) {
+	if (-d $ARGV[0]) {
+		print "No modules/scripts located in: $modulepath\n";
+	} else  {
+		print "Unknown module/script: $modulepath\n";
 	}
 }
 
@@ -44,6 +57,7 @@ exit(0);
 sub simple {
 	if ($File::Find::name =~ m/\.pm$/) {
 
+		print STDERR "Using new_from_file\n" if $debug;
 		my @ms = Module::Info::File->new_from_file($_);
 		foreach my $m (@ms) {
 			print $m->name if $m->name;
@@ -59,13 +73,11 @@ sub long {
 	
 	print STDERR Dumper $m if $debug;
 
-	if (ref $m) {
+	if (isa($m, "Module::Info") && can($m, "version")) {
 
 		my $version = $m->version || 'N/A';
 
 		print $m->name." located in ".$m->inc_dir." is version: ".$version."\n";
-	} else {
-		print STDERR "Unable to locate module $ARGV[0]\n";
 	}
 }
 
