@@ -1,12 +1,13 @@
 package Module::Info::File;
 
-# $Id: File.pm,v 1.9 2003/12/20 10:08:12 jonasbn Exp $
+# $Id: File.pm,v 1.10 2004/01/10 20:04:15 jonasbn Exp $
 
 use strict;
 use Module::Info;
+use File::Spec;
 use vars qw(@ISA $VERSION);
 
-$VERSION = '0.03';
+$VERSION = '0.04';
 @ISA = qw(Module::Info);
 
 sub new_from_file {
@@ -15,14 +16,20 @@ sub new_from_file {
     return unless -r $file;
 
     my $self = bless {}, ref $proto || $proto;
-
-	open(FIN, "<", $file);
-    my $name = '';
-    while (<FIN>) {
-        last if (($name) = $_ =~ m/^package (.*);/);
+	my $name = '';
+    	
+	if ($file =~ m/\.pm$/) {
+		open(FIN, "<", $file);
+    	while (<FIN>) {
+        	last if (($name) = $_ =~ m/^package (.*);/);
+		}
+		close(FIN);
+	} elsif ($file =~ m/\.pl$/) {
+		$name = $file;
+	} else {
+		warn "Unable to recognize file ($file) trying anyway"; 
+		$name = $file;
 	}
-	close(FIN);
-	
 	$self->{name} = $name;
 	$self->{file} = File::Spec->rel2abs($file);
 	

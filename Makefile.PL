@@ -1,6 +1,6 @@
 use ExtUtils::MakeMaker;
 
-# $Id: Makefile.PL,v 1.3 2003/11/03 20:38:33 jonasbn Exp $
+# $Id: Makefile.PL,v 1.4 2004/01/10 20:04:15 jonasbn Exp $
 
 WriteMakefile(
     'NAME'	        => 'Module::Info::File',
@@ -8,6 +8,7 @@ WriteMakefile(
 	'PREREQ_PM' => {
 		'Module::Info'   => '0.20',
 		'File::Basename' => 0,
+		'File::Spec'     => 0,
 		'Test::Harness'  => 0,
 		'Test::More'     => 0,
 		'Data::Dumper'   => 0,

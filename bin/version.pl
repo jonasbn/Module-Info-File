@@ -1,10 +1,13 @@
 #!/usr/bin/perl -w
 
-# $Id: version.pl,v 1.2 2003/09/28 09:19:47 jonasbn Exp $
+# $Id: version.pl,v 1.3 2004/01/10 20:04:15 jonasbn Exp $
 
 use strict;
-use Module::Info;
+use Module::Info::File;
 use Data::Dumper;
+use vars qw($VERSION);
+
+$VERSION = '0.02';
 
 my $debug = 0;
 my $modulepath;
@@ -17,17 +20,23 @@ if ($ARGV[0]) {
 
 my $m;
 if ($modulepath =~ m/::/) {
-	$m = Module::Info->new_from_module($modulepath);
-} elsif ($modulepath =~ m/.*\.pm$/) {
-	$m = Module::Info->new_from_file($modulepath);
+	$m = Module::Info::File->new_from_module($modulepath);
+} elsif (-f $modulepath) {
+	$m = Module::Info::File->new_from_file($modulepath);
 } else {
-	$m = Module::Info->new_from_module($modulepath);
+	$m = Module::Info::File->new_from_module($modulepath);
 }
 
 print STDERR Dumper $m if $debug;
 
-print $m->name." located in ".$m->inc_dir." is version: ".$m->version."\n";
+if (ref $m) {
 
+	my $version = $m->version || 'N/A';
+
+	print $m->name." located in ".$m->inc_dir." is version: ".$version."\n";
+} else {
+	print STDERR "Unable to locate module $ARGV[0]\n";
+}
 exit(0);
 
 sub usage {
@@ -48,6 +57,8 @@ version.pl - extracts module data from installed and uninstalled modules
 % version.pl XML::Simple
 
 % version.pl ~jonasbn/Develop/Games/Bingo/lib/Games/Bingo.pm
+
+% version.pl version.pl
 
 =cut
 

@@ -1,6 +1,6 @@
 CHANGES file for Module::Info::File
 
-$Id: CHANGES,v 1.5 2003/12/20 09:43:55 jonasbn Exp $
+$Id: CHANGES,v 1.6 2004/01/10 20:04:15 jonasbn Exp $
 
 0.01 Released 30th. September 2003
 
@@ -26,3 +26,19 @@ Initial revision
 
 - Added information to t/Info.t so if the Module::Info tests fail, the
   test asks the tester to mail me the information
+  
+0.04 Not released yet
+
+- Updated bin/version.pl updated with error handling
+
+- Update bin/version.pl with $VERSION number, I think this is a
+  requirement for scripts in the scripts section on CPAN
+
+- Added File::Spec to Makefile.PL
+
+- Fixed a few bugs in bin/version.pl (I think I must have lost a
+  version at some point)
+
+- Added handling of .pl scripts
+
+- Added a warning in the case where script is not a .pl or .pm
