@@ -1,6 +1,6 @@
 CHANGES file for Module::Info::File
 
-$Id: CHANGES 1410 2004-07-15 11:46:56Z jonasbn $
+$Id: CHANGES 1433 2004-09-19 17:00:09Z jonasbn $
 
 0.01 Released 30th. September 2003
 
@@ -49,15 +49,20 @@ Initial revision
   CPAN scripts directory (http://www.cpan.org/scripts/). The script was
   uploaded alone to PAUSE together with the release of 0.04
 
-- Added handling of directories so it is possible to get version numbers of all
-  perl modules in a directory recursively with bin/version.pl
+- Added handling of directories so it is possible to get version numbers of 
+  all perl modules in a directory recursively with bin/version.pl
   
 - Added INSTALL file
 
 - Makefile.PL had a makeover
 
-0.06 Not yet released
+0.06 Released 23rd. of July 2004
 
 - Patched with patch from LTHEGLER, should now work under 5.005_03, open was
   using the unecessary 3 arguments instead of just two.
 
+0.07 Released 19th. of September 2004
+
+- Added list context for constructor (new_from_file)
+
+- bin/version.pl updated to accomodate this

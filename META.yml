@@ -1,15 +1,15 @@
 #XXXXXXX This is a prototype!!!  It will change in the future!!! XXXXX#
 name:         Module-Info-File
-version:      0.06
+version:      0.07
 version_from: lib/Module/Info/File.pm
 installdirs:  site
 requires:
     Test::Harness:                 0
     File::Basename:                0
-    Test::More:                    0
     Module::Info:                  0.20
-    File::Spec:                    0
     Data::Dumper:                  0
+    File::Spec:                    0
+    Test::More:                    0
 
 distribution_type: module
 generated_by: ExtUtils::MakeMaker version 6.12

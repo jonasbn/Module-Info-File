@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 
-# $Id: version.pl 1255 2004-02-28 14:09:21Z jonasbn $
+# $Id: version.pl 1433 2004-09-19 17:00:09Z jonasbn $
 
 use strict;
 use File::Find;
@@ -19,18 +19,24 @@ if ($ARGV[0]) {
 	usage();
 }
 
-my $m;
+my @ms;
 if ($modulepath =~ m/::/) {
-	$m = Module::Info::File->new_from_module($modulepath);
-	long($m);
+	@ms = Module::Info::File->new_from_module($modulepath);
+	foreach my $m (@ms) {
+		long($m);
+	}
 } elsif (-f $modulepath) {
-	$m = Module::Info::File->new_from_file($modulepath);
-	long($m);
+	@ms = Module::Info::File->new_from_file($modulepath);
+	foreach my $m (@ms) {
+		long($m);
+	}
 } elsif (-d $modulepath) {
 	find(\&simple, $modulepath);
 } else {
-	$m = Module::Info::File->new_from_module($modulepath);
-	long($m);
+	@ms = Module::Info::File->new_from_module($modulepath);
+	foreach my $m (@ms) {
+		long($m);
+	}
 }
 
 exit(0);
@@ -38,11 +44,13 @@ exit(0);
 sub simple {
 	if ($File::Find::name =~ m/\.pm$/) {
 
-		my $m = Module::Info::File->new_from_file($_);
-		print $m->name if $m->name;
-		print ";";
-		print $m->version if $m->version;
-		print "\n";
+		my @ms = Module::Info::File->new_from_file($_);
+		foreach my $m (@ms) {
+			print $m->name if $m->name;
+			print ";";
+			print $m->version if $m->version;
+			print "\n";
+		}
 	}
 }
 
@@ -75,15 +83,15 @@ version.pl - extracts module data from installed and uninstalled modules
 
 =head1 SYNOPSIS
 
-% version.pl DBI
-
-% version.pl XML::Simple
-
-% version.pl ~jonasbn/Develop/Games/Bingo/lib/Games/Bingo.pm
-
-% version.pl version.pl
-
-% version.pl /System/Library/Perl/5.8.1
+	% version.pl DBI
+	
+	% version.pl XML::Simple
+	
+	% version.pl ~jonasbn/Develop/Games/Bingo/lib/Games/Bingo.pm
+	
+	% version.pl version.pl
+	
+	% version.pl /System/Library/Perl/5.8.1
 
 =head1 README
 
@@ -139,29 +147,17 @@ UNIX : System_administration
 
 =over 4
 
-=item
+=item L<Module::Info::File 0.07>
 
-C<Module::Info::File 0.05>
+=item L<Module::Info 0.20>
 
-=item
+=item L<File::Basename>
 
-C<Module::Info 0.20>
+=item L<File::Find>
 
-=item
+=item L<File::Spec>
 
-C<File::Basename>
-
-=item
-
-C<File::Find>
-
-=item
-
-C<File::Spec>
-
-=item
-
-C<Data::Dumper>
+=item L<Data::Dumper>
 
 =back
 
@@ -173,9 +169,9 @@ any
 
 =over 4
 
-=item Module::Info
+=item L<Module::Info>
 
-=item Module::Info::File
+=item L<Module::Info::File>
 
 =back
 

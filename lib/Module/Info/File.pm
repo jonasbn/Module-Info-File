@@ -1,54 +1,92 @@
 package Module::Info::File;
 
-# $Id: File.pm 1410 2004-07-15 11:46:56Z jonasbn $
+# $Id: File.pm 1433 2004-09-19 17:00:09Z jonasbn $
 
 use strict;
 use Module::Info;
 use File::Spec;
+use File::Basename qw(fileparse);
 use vars qw(@ISA $VERSION);
 
-$VERSION = '0.06';
+$VERSION = '0.07';
 @ISA = qw(Module::Info);
 
 sub new_from_file {
-    my($proto, $file) = @_;
+    my ($proto, $file) = @_;
 
     return unless -r $file;
 
-    my $self = bless {}, ref $proto || $proto;
-	my $name = '';
+	open(FIN, "<$file") or warn "Unable to open file: $file - $!";
 
-	if ($file =~ m/\.pm$/) {
-		open(FIN, "<". $file) or warn "Unable to open file: $file - $!";
+	my (@packages, $package, $version, $name, $dir);
+	while (<FIN>) {
+		#my ($filename, $suffix, $v);
+		
+		if (($package) = $_ =~ m/^package ([A-Za-z0-9_:]+);/) {
+			if ($package) {
+				$name = $package;
+			} else {
+				($name) = $file =~ m/(\w+\.pm)$/;
+			}
+		
+			#if ($file =~ m/\.pl$/) {
+			#	($filename,$v,$suffix) = fileparse($file,"\.pl");
+			#} elsif ($file =~ m/\.pm$/) {
+			#	($filename,$v,$suffix) = fileparse($file,"\.pm");
+			#}
 
-		my $n;
-		while (<FIN>) {
-			last if (($n) = $_ =~ m/^package ([A-Za-z0-9_:]+);/);
-		}		
-		close(FIN);
+			$dir = File::Spec->rel2abs($file);
+			$dir =~ s[/(\w+\.p(m|l))$][];
 
-		if ($n) {
-			$name = $n;
-		} else {
-			($name) = $file =~ m/(\w*\.pm)$/;
 		}
-	} elsif ($file =~ m/\.pl$/) {
-		$name = $file;
-	} else {
-		warn "Unable to recognize file ($file) trying anyway"; 
-		$name = $file;
+		if ((my ($v) = $_ =~ m/VERSION = '*([0-9_.]+)'*;/)) {
+			$version = $v || 'N/A';
+		}
+
+		push @packages, __PACKAGE__->new_from_data(
+			name    => $name,
+			dir     => $dir,
+			file    => $file,
+			version => ($version eq 'N/A')?undef:$version,
+		) if ($name and $dir and $file and $version);
+
+		$package = '';
+		$version = '';
 	}
-	$self->{name} = $name;
-	$self->{file} = File::Spec->rel2abs($file);
+	close(FIN);
 
-	my $dir = $self->{file};
+	if (wantarray) {
+		return @packages;
+	} else {
+		return pop @packages;
+	}
+}
 
-	$name =~ s[::][/]g if $name =~ m/::/;
+sub new_from_data {
+	my ($class, %params) = @_;
 
-	$dir =~ s[/($name|$name.p(m|l))$][];
-	$self->{dir} = $dir;
+	my $self = bless {}, $class || ref $class;
 
-    return $self;
+	foreach (keys %params) {
+		$self->{$_} = $params{$_} || undef;
+	}
+
+	return $self;
+}
+
+sub version {
+	my ($self, $version) = @_;
+	
+	if ($version) {
+		$self->{version} = $version;
+		return 1;
+	}
+	
+	if ($self->{version}) {
+		return $self->{version};
+	} else {
+		return $self->SUPER::version();
+	}
 }
 
 1;
@@ -61,17 +99,25 @@ Module::Info::File - retrieves module information from a file or script
 
 =head1 SYNOPSIS
 
-use Module::Info::File;
+	use Module::Info::File;
+	
+	my $module = Module::Info::File->new_from_file('path/to/Some/Module.pm');
+	
+	$mod->name();
+	
+	$mod->version();
+	
+	$mod->file();
+	
+	$mod->inc_dir();
+	
+	use Module::Info::File;
+	
+	my @modules = Module::Info::File->new_from_file('path/to/Some/Module.pm');
 
-my $module = Module::Info::File->new_from_file('path/to/Some/Module.pm');
-
-$mod->name();
-
-$mod->version();
-
-$mod->file();
-
-$mod->inc_dir();
+	foreach my $mod (@modules) {
+		print $mod->name() . "\n";
+	}
 
 =head1 DESCRIPTION
 
@@ -138,6 +184,10 @@ file, returns the file attribute
 
 Please refer to the documentation on B<Module::Info> for more details.
 
+In list context the module returns and array of Module::Info::File objects, with
+which you can use the above accessors. The information in the objects might not
+be complete though (SEE: CAVEATS).
+
 In the t/ directory of this distribution there is a test (Info.t), it
 includes some tests. These tests will test your installation of
 Module::Info (required by Module::Info::File), if the tests fail,
@@ -159,8 +209,14 @@ bin/version.pl
 
 =head1 CAVEATS
 
-The module cannot handle several package definitions in one file and
-only uses the first one it encounters.
+The module can somewhat handle several package definitions in one file, but 
+the information is not complete yet, such as version information etc.
+
+The method currently only support the following version number lines:
+
+	$VERSION = '0.01';
+	
+	$VERSION = 0.01;
 
 =head1 ACKNOWLEDGEMENTS
 
@@ -168,7 +224,8 @@ only uses the first one it encounters.
 
 =item *
 
-Lars Thegler (LTHEGLER), for not letting me go easily and a patch
+Lars Thegler (LTHEGLER), for not letting me go easily, a patch and suggesting 
+the list context variation.
 
 =item *
 
@@ -194,7 +251,7 @@ Module::Info::File and related modules are free software and is
 released under the Artistic License. See
 E<lt>http://www.perl.com/language/misc/Artistic.htmlE<gt> for details.
 
-Module::Info::File is (C) 2003 Jonas B. Nielsen (jonasbn)
+Module::Info::File is (C) 2003-2004 Jonas B. Nielsen (jonasbn)
 E<lt>jonasbn@cpan.orgE<gt>
 
 =cut
