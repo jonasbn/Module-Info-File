@@ -1,6 +1,6 @@
 CHANGES file for Module::Info::File
 
-$Id: CHANGES,v 1.6 2004/01/10 20:04:15 jonasbn Exp $
+$Id: CHANGES,v 1.8 2004/02/28 14:13:28 jonasbn Exp $
 
 0.01 Released 30th. September 2003
 
@@ -27,7 +27,7 @@ Initial revision
 - Added information to t/Info.t so if the Module::Info tests fail, the
   test asks the tester to mail me the information
   
-0.04 Not released yet
+0.04 Released 10th. January 2004
 
 - Updated bin/version.pl updated with error handling
 
@@ -42,3 +42,16 @@ Initial revision
 - Added handling of .pl scripts
 
 - Added a warning in the case where script is not a .pl or .pm
+
+0.05 Released 28th. of February 2004
+
+- Updated bin/version.pl with POD required to have the script in the
+  CPAN scripts directory (http://www.cpan.org/scripts/). The script was
+  uploaded alone to PAUSE together with the release of 0.04
+
+- Added handling of directories so it is possible to get version numbers of all
+  perl modules in a directory recursively with bin/version.pl
+  
+- Added INSTALL file
+
+- Makefile.PL had a makeover

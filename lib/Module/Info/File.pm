@@ -1,13 +1,13 @@
 package Module::Info::File;
 
-# $Id: File.pm,v 1.10 2004/01/10 20:04:15 jonasbn Exp $
+# $Id: File.pm,v 1.12 2004/02/28 14:19:34 jonasbn Exp $
 
 use strict;
 use Module::Info;
 use File::Spec;
 use vars qw(@ISA $VERSION);
 
-$VERSION = '0.04';
+$VERSION = '0.05';
 @ISA = qw(Module::Info);
 
 sub new_from_file {
@@ -17,13 +17,21 @@ sub new_from_file {
 
     my $self = bless {}, ref $proto || $proto;
 	my $name = '';
-    	
+
 	if ($file =~ m/\.pm$/) {
-		open(FIN, "<", $file);
-    	while (<FIN>) {
-        	last if (($name) = $_ =~ m/^package (.*);/);
-		}
+		open(FIN, "<", $file) or warn "Unable to open file: $file - $!";
+
+		my $n;
+		while (<FIN>) {
+			last if (($n) = $_ =~ m/^package ([A-Za-z0-9_:]+);/);
+		}		
 		close(FIN);
+
+		if ($n) {
+			$name = $n;
+		} else {
+			($name) = $file =~ m/(\w*\.pm)$/;
+		}
 	} elsif ($file =~ m/\.pl$/) {
 		$name = $file;
 	} else {
@@ -32,10 +40,12 @@ sub new_from_file {
 	}
 	$self->{name} = $name;
 	$self->{file} = File::Spec->rel2abs($file);
-	
+
 	my $dir = $self->{file};
-	$name =~ s[::][/]g;
-	$dir =~ s[/$name.p(m|l)][];
+
+	$name =~ s[::][/]g if $name =~ m/::/;
+
+	$dir =~ s[/($name|$name.p(m|l))$][];
 	$self->{dir} = $dir;
 
     return $self;
@@ -72,7 +82,7 @@ Module::Info and replaces the B<new_from_file> method so the lacking
 data can be accessed (dir and name attributes). Apart from that you can
 use all the neat accessors from Module::Info.
 
-In the bin folder in this distibution is a small script called
+In the bin folder in this distribution is a small script called
 version.pl, which was the beginning of everything.
 
 =head2 new_from_file

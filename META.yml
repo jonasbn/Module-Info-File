@@ -1,13 +1,13 @@
 #XXXXXXX This is a prototype!!!  It will change in the future!!! XXXXX#
 name:         Module-Info-File
-version:      0.04
+version:      0.05
 version_from: lib/Module/Info/File.pm
 installdirs:  site
 requires:
-    Data::Dumper:                  0
     Test::Harness:                 0
-    File::Spec:                    0
+    Data::Dumper:                  0
     Test::More:                    0
+    File::Spec:                    0
     Module::Info:                  0.20
     File::Basename:                0
 

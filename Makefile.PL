@@ -1,16 +1,24 @@
-use ExtUtils::MakeMaker;
+#Makefile.PL for Module::Info::File
 
-# $Id: Makefile.PL,v 1.4 2004/01/10 20:04:15 jonasbn Exp $
+# $Id: Makefile.PL,v 1.5 2004/02/28 14:10:51 jonasbn Exp $
+
+use strict;
+use ExtUtils::MakeMaker qw(WriteMakefile);
+
+# The names of the executables
+my @programs_to_install = qw(version.pl);
 
 WriteMakefile(
-    'NAME'	        => 'Module::Info::File',
+	'AUTHOR'		=> 'Jonas B. Nielsen (jonasbn) <jonasbn@cpan.org>',
+    'NAME'			=> 'Module::Info::File',
     'VERSION_FROM'  => 'lib/Module/Info/File.pm', # finds $VERSION
-	'PREREQ_PM' => {
+    'EXE_FILES'     => [ map "bin/$_", @programs_to_install ],
+	'PREREQ_PM'     => {
 		'Module::Info'   => '0.20',
 		'File::Basename' => 0,
 		'File::Spec'     => 0,
 		'Test::Harness'  => 0,
 		'Test::More'     => 0,
 		'Data::Dumper'   => 0,
-	}
+	},
 );
