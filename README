@@ -1,6 +1,6 @@
 README file for Module::Info::File
 
-$Id: README,v 1.1 2003/09/28 09:25:04 jonasbn Exp $
+$Id: README 1003 2003-09-28 09:25:04Z jonasbn $
 
 In the beginning I was using Module::Info, but due to a lacking
 functionality in this module I created Module::Info::File, which

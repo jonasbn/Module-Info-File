@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 
-# $Id: Info.t,v 1.3 2003/12/20 09:24:19 jonasbn Exp $
+# $Id: Info.t 1073 2003-12-20 09:24:19Z jonasbn $
 
 use strict;
 use Data::Dumper;

@@ -1,13 +1,13 @@
 package Module::Info::File;
 
-# $Id: File.pm,v 1.12 2004/02/28 14:19:34 jonasbn Exp $
+# $Id: File.pm 1410 2004-07-15 11:46:56Z jonasbn $
 
 use strict;
 use Module::Info;
 use File::Spec;
 use vars qw(@ISA $VERSION);
 
-$VERSION = '0.05';
+$VERSION = '0.06';
 @ISA = qw(Module::Info);
 
 sub new_from_file {
@@ -19,7 +19,7 @@ sub new_from_file {
 	my $name = '';
 
 	if ($file =~ m/\.pm$/) {
-		open(FIN, "<", $file) or warn "Unable to open file: $file - $!";
+		open(FIN, "<". $file) or warn "Unable to open file: $file - $!";
 
 		my $n;
 		while (<FIN>) {
@@ -168,7 +168,7 @@ only uses the first one it encounters.
 
 =item *
 
-Lars Thegler (LTHEGLER), for not letting me go easily
+Lars Thegler (LTHEGLER), for not letting me go easily and a patch
 
 =item *
 

@@ -1,6 +1,6 @@
 CHANGES file for Module::Info::File
 
-$Id: CHANGES,v 1.8 2004/02/28 14:13:28 jonasbn Exp $
+$Id: CHANGES 1410 2004-07-15 11:46:56Z jonasbn $
 
 0.01 Released 30th. September 2003
 
@@ -55,3 +55,9 @@ Initial revision
 - Added INSTALL file
 
 - Makefile.PL had a makeover
+
+0.06 Not yet released
+
+- Patched with patch from LTHEGLER, should now work under 5.005_03, open was
+  using the unecessary 3 arguments instead of just two.
+

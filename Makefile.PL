@@ -1,6 +1,6 @@
 #Makefile.PL for Module::Info::File
 
-# $Id: Makefile.PL,v 1.5 2004/02/28 14:10:51 jonasbn Exp $
+# $Id: Makefile.PL 1256 2004-02-28 14:10:51Z jonasbn $
 
 use strict;
 use ExtUtils::MakeMaker qw(WriteMakefile);

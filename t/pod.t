@@ -1,4 +1,4 @@
-# $Id: pod.t,v 1.1 2003/12/20 09:46:45 jonasbn Exp $ 
+# $Id: pod.t 1075 2003-12-20 09:46:45Z jonasbn $ 
 
 #pod test courtesy of petdance
 #http://use.perl.org/~petdance/journal/12391
