@@ -9,3 +9,4 @@ t/Info.t
 t/pod.t
 TODO
 CHANGES
+META.yml                                Module meta-data (added by MakeMaker)

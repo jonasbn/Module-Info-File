@@ -1,12 +1,12 @@
 package Module::Info::File;
 
-# $Id: File.pm,v 1.5 2003/11/03 20:38:33 jonasbn Exp $
+# $Id: File.pm,v 1.9 2003/12/20 10:08:12 jonasbn Exp $
 
 use strict;
 use Module::Info;
 use vars qw(@ISA $VERSION);
 
-$VERSION = '0.02';
+$VERSION = '0.03';
 @ISA = qw(Module::Info);
 
 sub new_from_file {
@@ -40,9 +40,7 @@ __END__
 
 =head1 NAME
 
-Module::Info::File - A class inherting from Module::Info
-
-=cut
+Module::Info::File - retrieves module information from a file or script
 
 =head1 SYNOPSIS
 
@@ -58,14 +56,22 @@ $mod->file();
 
 $mod->inc_dir();
 
-=cut
-
 =head1 DESCRIPTION
+
+Module::Info (SEE REFERENCES), are lacking functionality of being able
+to extract certain data when parsing a module directly from a file. I
+have therefor created Module::Info::File, which inherits from
+Module::Info and replaces the B<new_from_file> method so the lacking
+data can be accessed (dir and name attributes). Apart from that you can
+use all the neat accessors from Module::Info.
+
+In the bin folder in this distibution is a small script called
+version.pl, which was the beginning of everything.
 
 =head2 new_from_file
 
 Given a file, it will interpret this as the module you want information
-about.  You can also hand it a perl script.
+about. You can also hand it a perl script.
 
 After construction has been completed three attributes have been set in
 the object:
@@ -115,7 +121,10 @@ file, returns the file attribute
 
 Please refer to the documentation on B<Module::Info> for more details.
 
-=cut
+In the t/ directory of this distribution there is a test (Info.t), it
+includes some tests. These tests will test your installation of
+Module::Info (required by Module::Info::File), if the tests fail,
+Module::Info::File will be obsolete and can be discontinued.
 
 =head1 SEE ALSO
 
@@ -131,18 +140,36 @@ bin/version.pl
 
 =back
 
-=cut
-
 =head1 CAVEATS
 
 The module cannot handle several package definitions in one file and
 only uses the first one it encounters.
 
+=head1 ACKNOWLEDGEMENTS
+
+=over 4
+
+=item *
+
+Lars Thegler (LTHEGLER), for not letting me go easily
+
+=item *
+
+Thomas Eibner (THOMAS), for reviewing the POD
+
+=item *
+
+Mattia Barbon (MBARBON), for writing Module::Info
+
+=item *
+
+bigj at Perlmonks who mentioned Module::Info
+
+=back
+
 =head1 AUTHOR
 
 jonasbn E<lt>jonasbn@cpan.orgE<gt>
-
-=cut
 
 =head1 COPYRIGHT
 

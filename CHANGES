@@ -1,6 +1,6 @@
 CHANGES file for Module::Info::File
 
-$Id: CHANGES,v 1.3 2003/11/03 20:38:33 jonasbn Exp $
+$Id: CHANGES,v 1.5 2003/12/20 09:43:55 jonasbn Exp $
 
 0.01 Released 30th. September 2003
 
@@ -17,3 +17,12 @@ Initial revision
 - Added use of File::Basename to make test on Win32 work
 
 - Fixed bug (rt: #4147) - broken tests on Win32
+
+0.03 Released 20th. December 20 2003
+
+- POD cleaned and reviewed by Rias.
+
+- ACKNOWLEDGE section added
+
+- Added information to t/Info.t so if the Module::Info tests fail, the
+  test asks the tester to mail me the information
