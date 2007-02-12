@@ -1,17 +1,29 @@
-#XXXXXXX This is a prototype!!!  It will change in the future!!! XXXXX#
-name:         Module-Info-File
-version:      0.08
-version_from: lib/Module/Info/File.pm
-installdirs:  site
+---
+name: Module-Info-File
+version: 0.09
+author:
+  - 'Jonas B. Nielsen, <jonasbn@cpan.org>'
+abstract: retrieves module information from a file or script
+license: perl
+resources:
+  license: http://dev.perl.org/licenses/
 requires:
-    UNIVERSAL:                     0
-    Data::Dumper:                  0
-    Module::Info:                  0.20
-    Carp:                          0
-    Test::More:                    0
-    File::Spec:                    0
-    File::Basename:                0
-    Test::Harness:                 0
-
-distribution_type: module
-generated_by: ExtUtils::MakeMaker version 6.12
+  Carp: 0
+  Data::Dumper: 0
+  File::Spec: 0
+  Module::Info: 0.20
+  Test::Harness: 0
+  Test::More: 0
+  UNIVERSAL: 0
+provides:
+  Module::Info::File:
+    file: lib/Module/Info/File.pm
+    version: 0.09
+no_index:
+  directory:
+    - drafts
+    - t
+generated_by: Module::Build version 0.2805
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.2.html
+  version: 1.2

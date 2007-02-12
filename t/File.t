@@ -1,10 +1,10 @@
 #!/usr/bin/perl -w
 
-# $Id: File.t 1501 2004-11-13 15:56:14Z jonasbn $
+# $Id: File.t 1603 2005-12-03 17:46:12Z jonasbn $
 
 use strict;
 use Data::Dumper;
-use Test::More tests => 12;
+use Test::More tests => 13;
 use File::Basename;
 use lib qw(lib);
 
@@ -21,6 +21,9 @@ isa_ok($mod, 'Module::Info::File');
 
 #test 3
 isa_ok($mod, 'Module::Info');
+
+#test 4
+can_ok($mod, qw(new_from_module new_from_loaded));
 
 #test 4
 is($mod->name, 'Module::Info::File', 'Testing the name');

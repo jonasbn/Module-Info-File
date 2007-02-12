@@ -1,82 +1,84 @@
 package Module::Info::File;
 
-# $Id: File.pm 1501 2004-11-13 15:56:14Z jonasbn $
+# $Id: File.pm 1697 2007-02-12 11:52:41Z jonasbn $
 
 use strict;
-use Module::Info;
+use warnings;
+use base 'Module::Info';
 use Carp;
 use File::Spec;
-use File::Basename qw(fileparse);
-use vars qw(@ISA $VERSION);
+use vars qw($VERSION);
 
-$VERSION = '0.08';
-@ISA = qw(Module::Info);
+$VERSION = '0.09';
 
 sub new_from_file {
-    my ($proto, $file) = @_;
+    my ( $proto, $filename ) = @_;
 
-	open(FIN, "<$file") or croak "Unable to open file: $file - $!";
+    open my $file, '<', $filename
+      or croak "Unable to open file: $filename - $!";
 
-	my (@packages, $version, $name, $dir);
-	while (<FIN>) {
-		if ($_ =~ m/^package ([A-Za-z0-9_:]+);/) {
-			if ($1) {
-				$name = $1;
-			} else {
-				($name) = $file =~ m/(\w+\.pm)$/;
-			}
-		}
-		$dir = File::Spec->rel2abs($file);
-		$dir =~ s[/(\w+\.p(m|l))$][];
+    my ( @packages, $version, $name, $dir );
+    while (<$file>) {
+        if ( $_ =~ m/\bpackage\s?([A-Za-z0-9_:]+);/xm ) {
+            if ($1) {
+                $name = $1;
+            }
+            else {
+                ($name) = $file =~ m/(\w+\.pm)$/xm;
+            }
+        }
+        $dir = File::Spec->rel2abs($file);
+        $dir =~ s[/(\w+\.p(m|l))$][]xm;
 
-		if ($_ =~ m/\bVERSION\b.*=.* '*([0-9_.]+)'*;/) {
-			$version = $1;
-		}
-			
-		if ($name and $dir and $file and $version) {
-			last;
-		}
+        if ( $_ =~ m/\bVERSION\b\s*=\s*'([0-9_.]+)'*;/xm ) {
+            $version = $1;
+        }
 
-	}
-	close(FIN);
+        if ( $name and $dir and $filename and $version ) {
+            last;
+        }
 
-	return __PACKAGE__->new_from_data(
-		name    => $name,
-		dir     => $dir,
-		file    => $file,
-		version => $version?$version:undef,
-	);
+    }
+    close $file;
+
+    return __PACKAGE__->new_from_data(
+        name    => $name,
+        dir     => $dir,
+        file    => $filename,
+        version => $version ? $version : undef,
+    );
 }
 
 sub new_from_data {
-	my ($class, %params) = @_;
+    my ( $class, %params ) = @_;
 
-	my $self = bless {}, $class || ref $class;
+    my $self = bless {}, $class || ref $class;
 
-	foreach (keys %params) {
-		$self->{$_} = $params{$_} || undef;
-	}
+    foreach ( keys %params ) {
+        $self->{$_} = $params{$_} || undef;
+    }
 
-	if (! $self->{'version'}) {
-		$self->{'version'} = $self->version();
-	}
+    if ( !$self->{'version'} ) {
+        $self->{'version'} = $self->version();
+    }
 
-	return $self;
+    return $self;
 }
 
 sub version {
-	my ($self, $version) = @_;
-	
-	if ($version) {
-		$self->{version} = $version;
-		return 1;
-	}
-	
-	if ($self->{version}) {
-		return $self->{version};
-	} else {
-		return $self->SUPER::version();
-	}
+    my ( $self, $version ) = @_;
+
+    if ($version) {
+        $self->{version} = $version;
+        return 1;
+    }
+
+    if ( $self->{version} ) {
+        return $self->{version};
+    }
+    else {
+        return $self->SUPER::version();
+    }
 }
 
 1;
@@ -101,6 +103,10 @@ Module::Info::File - retrieves module information from a file or script
 	
 	$mod->inc_dir();
 
+=head1 VERSION
+
+This POD describes version 0.09 of Module::Info::File
+
 =head1 DESCRIPTION
 
 Module::Info (SEE REFERENCES), are lacking functionality of being able
@@ -112,6 +118,8 @@ use all the neat accessors from Module::Info.
 
 In the bin folder in this distribution is a small script called
 version.pl, which was the beginning of everything.
+
+=head1 SUBROUTINES/METHODS
 
 =head2 new_from_file
 
@@ -150,7 +158,13 @@ was the starting point for this module.
 
 =back
 
-Please refer to the documentation on B<Module::Info> for more details.
+=head2 new_from_data
+
+A helper method to streamline the result set
+
+
+In general please refer to the documentation on B<Module::Info> for more 
+details.
 
 In list context the module returns and array of Module::Info::File objects, with
 which you can use the above accessors. The information in the objects might not
@@ -171,7 +185,7 @@ Module::Info::File will be obsolete and can be discontinued.
 
 =back
 
-=head1 CAVEATS
+=head1 BUGS AND LIMITATIONS
 
 The module can somewhat handle several package definitions in one file, but 
 the information is not complete yet, such as version information etc.
@@ -182,14 +196,98 @@ The method currently only support the following version number lines:
 	
 	$VERSION = 0.01;
 
+=head1 INCOMPATIBILITIES
+
+Eric D. Paterson scanned his complete CPAN installation and got and came across
+a few problems:
+
+=over
+
+=item L<DBD::Oracle>, the package was defined in a closure, this is handled from 
+Module::Info::File 0.09.
+
+=item L<Archive::Zip::Tree>, which is installed, however deprecated and does NOT
+contain a package defition.
+
+=item L<CGI::Apache>, where the installed version was located in CGI/apache.pm
+so the casing was not uniform with the package definition, I have asked Eric
+for further information on this issue, regarding his version and installation.
+
+=back
+
+=head1 DIAGNOSTICS
+
+=over
+
+=item * Unable to open file: <filename> - <operating system error>
+
+If the constructor B<new_from_file> is given a filename parameter, which does 
+not meet the following prerequisites:
+
+=over
+
+=item * it must be a file and it must exist
+
+=item * the file must be readable by the user
+
+=back
+
+=back
+
+=head1 CONFIGURATION AND ENVIRONMENT
+
+There is a such no configuration necessary and Module::Info::File is expected
+to work on the same environments as perl itself.
+
+=head1 DEPENDENCIES
+
+This module is a sub-class of L<Module::Info>, so the following direct 
+dependencies have to be met:
+
+=over
+
+=item L<Module::Info> 0.20
+
+=item L<File::Spec>, to work on non-unix operating systems
+
+=item Perl 5.6.0 and above
+
+Compability for older perls is no longer required, if somebody would
+require this I would be willing to invest the time and effort.
+
+=back
+
+=head1 TODO
+
+=over
+
+=item * Use PPI for parsing instead of own parsing mechanisms or it this serious 
+overkill?
+
+=back
+
 =head1 ACKNOWLEDGEMENTS
+
+In no particular order
 
 =over 4
 
 =item *
 
-Lars Thegler (LTHEGLER), for not letting me go easily, a patch and suggesting 
-the list context variation.
+Jeffrey Ryan Thalhammer, for L<Perl::Critic>
+
+=item *
+
+chromatic, for L<Test::Kwalitee>
+
+=item *
+
+Eric D. Peterson, for reporting bugs resulting in an improvement 
+
+=item *
+
+Lars Thegler. tagg (LTHEGLER), for not letting me go easily, a patch and
+suggesting the list context variation.
 
 =item *
 
@@ -214,13 +312,13 @@ necessarily available to a module author.
 
 jonasbn E<lt>jonasbn@cpan.orgE<gt>
 
-=head1 COPYRIGHT
+=head1 LICENSE AND COPYRIGHT
 
 Module::Info::File and related modules are free software and is
 released under the Artistic License. See
 E<lt>http://www.perl.com/language/misc/Artistic.htmlE<gt> for details.
 
-Module::Info::File is (C) 2003-2004 Jonas B. Nielsen (jonasbn)
+Module::Info::File is (C) 2003-2007 Jonas B. Nielsen (jonasbn)
 E<lt>jonasbn@cpan.orgE<gt>
 
 =cut
