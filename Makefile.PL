@@ -15,7 +15,7 @@ WriteMakefile
                          },
           'INSTALLDIRS' => 'site',
           'EXE_FILES' => [
-                           '/Users/jonasbn/develop/svn-cph.pm/trunk/modules/Module-Info-File/bin/version.pl'
+                           'script/version.pl'
                          ],
           'PL_FILES' => {}
         )

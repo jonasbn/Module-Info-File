@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 
-# $Id: version.pl 1501 2004-11-13 15:56:14Z jonasbn $
+# $Id: version.pl 1707 2007-02-13 19:38:51Z jonasbn $
 
 use strict;
 use File::Find;

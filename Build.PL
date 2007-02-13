@@ -11,6 +11,9 @@ my $build = Module::Build->new(
 	dist_version_from => 'lib/Module/Info/File.pm',
     distribution_type => 'module',
 	license           => 'perl',
+	scripts => {
+		'script/version.pl'   => 'script/version.pl',
+	},
     recursive_test_files => 1,
 	requires => {
 		'Module::Info'   => '0.20',

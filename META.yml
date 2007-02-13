@@ -1,6 +1,6 @@
 ---
 name: Module-Info-File
-version: 0.09
+version: 0.10
 author:
   - 'Jonas B. Nielsen, <jonasbn@cpan.org>'
 abstract: retrieves module information from a file or script
@@ -18,7 +18,7 @@ requires:
 provides:
   Module::Info::File:
     file: lib/Module/Info/File.pm
-    version: 0.09
+    version: 0.10
 no_index:
   directory:
     - drafts

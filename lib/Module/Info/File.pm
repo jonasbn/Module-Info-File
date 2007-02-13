@@ -1,6 +1,6 @@
 package Module::Info::File;
 
-# $Id: File.pm 1697 2007-02-12 11:52:41Z jonasbn $
+# $Id: File.pm 1710 2007-02-13 19:42:49Z jonasbn $
 
 use strict;
 use warnings;
@@ -9,7 +9,7 @@ use Carp;
 use File::Spec;
 use vars qw($VERSION);
 
-$VERSION = '0.09';
+$VERSION = '0.10';
 
 sub new_from_file {
     my ( $proto, $filename ) = @_;
