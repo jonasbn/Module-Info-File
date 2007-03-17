@@ -1,6 +1,6 @@
 package Module::Info::File;
 
-# $Id: File.pm 1710 2007-02-13 19:42:49Z jonasbn $
+# $Id: File.pm 1838 2007-03-17 17:56:31Z jonasbn $
 
 use strict;
 use warnings;
@@ -9,21 +9,20 @@ use Carp;
 use File::Spec;
 use vars qw($VERSION);
 
-$VERSION = '0.10';
+$VERSION = '0.11';
 
 sub new_from_file {
     my ( $proto, $filename ) = @_;
 
     open my $file, '<', $filename
-      or croak "Unable to open file: $filename - $!";
+        or croak "Unable to open file: $filename - $!";
 
     my ( @packages, $version, $name, $dir );
     while (<$file>) {
         if ( $_ =~ m/\bpackage\s?([A-Za-z0-9_:]+);/xm ) {
             if ($1) {
                 $name = $1;
-            }
-            else {
+            } else {
                 ($name) = $file =~ m/(\w+\.pm)$/xm;
             }
         }
@@ -75,8 +74,7 @@ sub version {
 
     if ( $self->{version} ) {
         return $self->{version};
-    }
-    else {
+    } else {
         return $self->SUPER::version();
     }
 }
@@ -105,7 +103,7 @@ Module::Info::File - retrieves module information from a file or script
 
 =head1 VERSION
 
-This POD describes version 0.09 of Module::Info::File
+This POD describes version 0.11 of Module::Info::File
 
 =head1 DESCRIPTION
 

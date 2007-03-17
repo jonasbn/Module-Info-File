@@ -8,6 +8,11 @@ MANIFEST			This list of files
 META.yml
 README
 script/version.pl
+t/critic.t
 t/File.t
 t/Info.t
+t/kwalitee.t
+t/perlcriticrc
+t/pod-coverage.t
+t/pod.t
 TODO
