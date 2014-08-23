@@ -1,5 +1,10 @@
 Changes file for Module::Info::File
 
+0.12 2014.08.23, maintenance release, update not necessary
+
+- Ported from Module::Build to Dist::Zilla
+
+
 0.11 2007.03.17, maintenance release, update not necessary
 
 - Added t/perlcriticrc
