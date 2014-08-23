@@ -9,7 +9,7 @@ use Carp;
 use File::Spec;
 use vars qw($VERSION);
 
-$VERSION = '0.11';
+$VERSION = '0.12';
 
 sub new_from_file {
     my ( $proto, $filename ) = @_;
@@ -316,7 +316,7 @@ Module::Info::File and related modules are free software and is
 released under the Artistic License. See
 E<lt>http://www.perl.com/language/misc/Artistic.htmlE<gt> for details.
 
-Module::Info::File is (C) 2003-2007 Jonas B. Nielsen (jonasbn)
+Module::Info::File is (C) 2003-2014 Jonas B. Nielsen (jonasbn)
 E<lt>jonasbn@cpan.orgE<gt>
 
 =cut
