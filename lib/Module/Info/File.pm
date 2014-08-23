@@ -1,7 +1,5 @@
 package Module::Info::File;
 
-# $Id: File.pm 1838 2007-03-17 17:56:31Z jonasbn $
-
 use strict;
 use warnings;
 use base 'Module::Info';
@@ -90,20 +88,20 @@ Module::Info::File - retrieves module information from a file or script
 =head1 SYNOPSIS
 
 	use Module::Info::File;
-	
+
 	my $module = Module::Info::File->new_from_file('path/to/Some/Module.pm');
-	
+
 	$mod->name();
-	
+
 	$mod->version();
-	
+
 	$mod->file();
-	
+
 	$mod->inc_dir();
 
 =head1 VERSION
 
-This POD describes version 0.11 of Module::Info::File
+This POD describes version 0.12 of Module::Info::File
 
 =head1 DESCRIPTION
 
@@ -161,7 +159,7 @@ was the starting point for this module.
 A helper method to streamline the result set
 
 
-In general please refer to the documentation on B<Module::Info> for more 
+In general please refer to the documentation on B<Module::Info> for more
 details.
 
 In list context the module returns and array of Module::Info::File objects, with
@@ -185,13 +183,13 @@ Module::Info::File will be obsolete and can be discontinued.
 
 =head1 BUGS AND LIMITATIONS
 
-The module can somewhat handle several package definitions in one file, but 
+The module can somewhat handle several package definitions in one file, but
 the information is not complete yet, such as version information etc.
 
 The method currently only support the following version number lines:
 
 	$VERSION = '0.01';
-	
+
 	$VERSION = 0.01;
 
 =head1 INCOMPATIBILITIES
@@ -201,7 +199,7 @@ a few problems:
 
 =over
 
-=item L<DBD::Oracle>, the package was defined in a closure, this is handled from 
+=item L<DBD::Oracle>, the package was defined in a closure, this is handled from
 Module::Info::File 0.09.
 
 =item L<Archive::Zip::Tree>, which is installed, however deprecated and does NOT
@@ -219,7 +217,7 @@ for further information on this issue, regarding his version and installation.
 
 =item * Unable to open file: <filename> - <operating system error>
 
-If the constructor B<new_from_file> is given a filename parameter, which does 
+If the constructor B<new_from_file> is given a filename parameter, which does
 not meet the following prerequisites:
 
 =over
@@ -239,7 +237,7 @@ to work on the same environments as perl itself.
 
 =head1 DEPENDENCIES
 
-This module is a sub-class of L<Module::Info>, so the following direct 
+This module is a sub-class of L<Module::Info>, so the following direct
 dependencies have to be met:
 
 =over
@@ -259,7 +257,7 @@ require this I would be willing to invest the time and effort.
 
 =over
 
-=item * Use PPI for parsing instead of own parsing mechanisms or it this serious 
+=item * Use PPI for parsing instead of own parsing mechanisms or it this serious
 overkill?
 
 =back
@@ -280,7 +278,7 @@ chromatic, for L<Test::Kwalitee>
 
 =item *
 
-Eric D. Peterson, for reporting bugs resulting in an improvement 
+Eric D. Peterson, for reporting bugs resulting in an improvement
 
 =item *
 
