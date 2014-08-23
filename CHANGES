@@ -2,6 +2,8 @@ Changes file for Module::Info::File
 
 0.12 2014.08.23, maintenance release, update not necessary
 
+- Specified Perl version to 5.6 as pointed out by Perl::Critic
+
 - Ported from Module::Build to Dist::Zilla
 
 
