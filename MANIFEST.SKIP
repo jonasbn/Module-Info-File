@@ -71,3 +71,15 @@
 
 # Avoid archives of this distribution
 \bModule-Info-File-[\d\.\_]+
+
+# Github files
+README.mkdn
+.travis.yml
+
+# Komodo files
+\.komodoproject
+\.kpf
+
+# SublimeText 2 project files
+\.sublime-project
+\.sublime-workspace
