@@ -1,6 +1,13 @@
 Changes file for Module::Info::File
 
-0.12 2014.08.23, maintenance release, update not necessary
+0.13 2014.08.25 maintenance release, update not necessary
+
+- Additions to MANIFEST.SKIP
+
+- License upgraded to Artistic 2.0 from Artistic 1.0
+
+
+0.12 2014.08.23 maintenance release, update not necessary
 
 - Specified Perl version to 5.6 as pointed out by Perl::Critic
 

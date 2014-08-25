@@ -7,7 +7,7 @@ use Carp;
 use File::Spec;
 use vars qw($VERSION);
 
-$VERSION = '0.12';
+$VERSION = '0.13';
 
 sub new_from_file {
     my ( $proto, $filename ) = @_;
@@ -101,7 +101,7 @@ Module::Info::File - retrieves module information from a file or script
 
 =head1 VERSION
 
-This POD describes version 0.12 of Module::Info::File
+This POD describes version 0.13 of Module::Info::File
 
 =head1 DESCRIPTION
 
@@ -311,8 +311,7 @@ jonasbn E<lt>jonasbn@cpan.orgE<gt>
 =head1 LICENSE AND COPYRIGHT
 
 Module::Info::File and related modules are free software and is
-released under the Artistic License. See
-E<lt>http://www.perl.com/language/misc/Artistic.htmlE<gt> for details.
+released under the Artistic License 2.0.
 
 Module::Info::File is (C) 2003-2014 Jonas B. Nielsen (jonasbn)
 E<lt>jonasbn@cpan.orgE<gt>
