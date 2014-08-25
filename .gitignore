@@ -22,3 +22,5 @@ MYMETA.json
 Makefile.PL
 *.sublime-project
 *.sublime-workspace
+/Module-Info-File*tar.gz
+/Module-Info-File*/
