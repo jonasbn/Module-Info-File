@@ -81,6 +81,16 @@ sub version {
 
 __END__
 
+=pod
+
+=begin markdown
+
+[![CPAN version](https://badge.fury.io/pl/Module-Info-File.svg)](http://badge.fury.io/pl/Module-Info-File)
+[![Build Status](https://travis-ci.org/jonasbn/Module-Info-File.svg?branch=master)](https://travis-ci.org/jonasbn/Module-Info-File)
+[![Coverage Status](https://coveralls.io/repos/jonasbn/Module-Info-File/badge.png)](https://coveralls.io/r/jonasbn/Module-Info-File)
+
+=end markdown
+
 =head1 NAME
 
 Module::Info::File - retrieve module information from a file

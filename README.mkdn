@@ -4,7 +4,11 @@
 
 # NAME
 
-Module::Info::File - retrieve module/package information from a file or script
+Module::Info::File - retrieve module information from a file
+
+# VERSION
+
+This POD describes version 0.13 of Module::Info::File
 
 # SYNOPSIS
 
@@ -19,10 +23,6 @@ Module::Info::File - retrieve module/package information from a file or script
         $mod->file();
 
         $mod->inc_dir();
-
-# VERSION
-
-This POD describes version 0.11 of Module::Info::File
 
 # DESCRIPTION
 
@@ -161,7 +161,7 @@ jonasbn <jonasbn@cpan.org>
 # LICENSE AND COPYRIGHT
 
 Module::Info::File and related modules are free software and is
-released under the Artistic License 2.0
+released under the Artistic License 2.0.
 
 Module::Info::File is (C) 2003-2014 Jonas B. Nielsen (jonasbn)
 <jonasbn@cpan.org>
