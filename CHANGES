@@ -1,5 +1,11 @@
 Changes file for Module::Info::File
 
+0.14 2014.08.27 bug fix release, update not necessary
+
+- Removed use of UNIVERSAL, the API used was deprecated and no 
+  longer necessary, see Github issue [#1]
+
+
 0.13 2014.08.25 maintenance release, update not necessary
 
 - Additions to MANIFEST.SKIP

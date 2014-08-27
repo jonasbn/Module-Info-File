@@ -7,7 +7,7 @@ use Carp;
 use File::Spec;
 use vars qw($VERSION);
 
-$VERSION = '0.13';
+$VERSION = '0.14';
 
 sub new_from_file {
     my ( $proto, $filename ) = @_;
@@ -83,7 +83,11 @@ __END__
 
 =head1 NAME
 
-Module::Info::File - retrieves module information from a file or script
+Module::Info::File - retrieve module information from a file
+
+=head1 VERSION
+
+This POD describes version 0.13 of Module::Info::File
 
 =head1 SYNOPSIS
 
@@ -98,10 +102,6 @@ Module::Info::File - retrieves module information from a file or script
 	$mod->file();
 
 	$mod->inc_dir();
-
-=head1 VERSION
-
-This POD describes version 0.13 of Module::Info::File
 
 =head1 DESCRIPTION
 

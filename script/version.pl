@@ -5,7 +5,6 @@
 use strict;
 use File::Find;
 use Module::Info::File;
-use UNIVERSAL qw(can isa);
 use Data::Dumper;
 use diagnostics;
 use vars qw($VERSION);
@@ -73,7 +72,7 @@ sub long {
 	
 	print STDERR Dumper $m if $debug;
 
-	if (isa($m, "Module::Info") && can($m, "version")) {
+	if ($m->isa("Module::Info") && $m->can("version")) {
 
 		my $version = $m->version || 'N/A';
 
