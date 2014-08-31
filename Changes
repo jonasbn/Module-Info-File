@@ -121,7 +121,7 @@ Changes file for Module::Info::File
 
  - Added version_bug.t to t/ (not in distribution)
 
-0.07 Released 19th. of September 2004
+0.07 2004-09-19
 
 - Added list context for constructor (new_from_file)
 
