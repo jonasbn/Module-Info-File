@@ -17,17 +17,20 @@ sub new_from_file {
 
     my ( @packages, $version, $name, $dir );
     while (<$file>) {
-        if ( $_ =~ m/\bpackage\s?([A-Za-z0-9_:]+);/xm ) {
+        if ( !$name && $_ =~ m/\bpackage\s?([A-Za-z0-9_:]+);/xm ) {
             if ($1) {
                 $name = $1;
             } else {
                 ($name) = $file =~ m/(\w+\.pm)$/xm;
             }
         }
-        $dir = File::Spec->rel2abs($file);
-        $dir =~ s[/(\w+\.p(m|l))$][]xm;
 
-        if ( $_ =~ m/\bVERSION\b\s*=\s*'([0-9_.]+)'*;/xm ) {
+        unless ($dir) {
+            $dir = File::Spec->rel2abs($file);
+            $dir =~ s[/(\w+\.p(m|l))$][]xm;
+        }
+
+        if ( !$version && $_ =~ m/\bVERSION\b\s*=\s*'([0-9_.]+)'*;/xm ) {
             $version = $1;
         }
 
