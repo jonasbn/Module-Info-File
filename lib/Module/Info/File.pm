@@ -15,7 +15,7 @@ sub new_from_file {
     open my $file, '<', $filename
         or croak "Unable to open file: $filename - $!";
 
-    my ( @packages, $version, $name, $dir );
+    my ( $version, $name, $dir );
     while (<$file>) {
         if ( $_ =~ m/\bpackage\s?([A-Za-z0-9_:]+);/xm ) {
             if ($1) {
