@@ -1,8 +1,7 @@
-#!/usr/bin/perl -w
-
-# $Id: version.pl 1707 2007-02-13 19:38:51Z jonasbn $
+#!/usr/bin/env perl
 
 use strict;
+use warnings;
 use File::Find;
 use Module::Info::File;
 use Data::Dumper;
