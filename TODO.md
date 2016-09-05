@@ -1,17 +1,21 @@
 TODO file for Module::Info::File
 
-$Id: TODO 1697 2007-02-12 11:52:41Z jonasbn $
+[ ] Reimplement list context from version 0.07, which was removed in 0.08
 
-- Reimplement list context from version 0.07, which was removed in 0.08
+[ ] Should we use [Test::Version](https://metacpan.org/pod/Test::Version) to retrieve `VERSION`?
 
-- Should we use Test::Version to retrieve VERSION?
-
-- Have a look at Test::Coverage, this is the current state and it does not
+[ ] Have a look at test coverage, this is the current state and it does not
   make sense:
-  
+
+```
 ---------------------------- ------ ------ ------ ------ ------ ------ ------
 File                           stmt   bran   cond    sub    pod   time  total
 ---------------------------- ------ ------ ------ ------ ------ ------ ------
 blib/lib/Module/Info/File.pm    n/a    n/a    n/a    n/a    n/a    n/a    n/a
 Total                           n/a    n/a    n/a    n/a    n/a    n/a    n/a
 ---------------------------- ------ ------ ------ ------ ------ ------ ------
+```
+
+[ ] Make script (`version.pl`) more easily installable
+
+
