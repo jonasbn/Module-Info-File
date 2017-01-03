@@ -110,13 +110,13 @@ This POD describes version 0.13 of Module::Info::File
 
 	my $module = Module::Info::File->new_from_file('path/to/Some/Module.pm');
 
-	$mod->name();
+	$module->name();
 
-	$mod->version();
+	$module->version();
 
-	$mod->file();
+	$module->file();
 
-	$mod->inc_dir();
+	$module->inc_dir();
 
 =head1 DESCRIPTION
 
