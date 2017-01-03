@@ -120,15 +120,12 @@ This POD describes version 0.13 of Module::Info::File
 
 =head1 DESCRIPTION
 
-Module::Info (SEE REFERENCES), are lacking functionality of being able
+B<Module::Info> (SEE REFERENCES), are lacking functionality of being able
 to extract certain data when parsing a module directly from a file. I
 have therefor created Module::Info::File, which inherits from
 Module::Info and replaces the B<new_from_file> method so the lacking
 data can be accessed (dir and name attributes). Apart from that you can
 use all the neat accessors from Module::Info.
-
-In the bin folder in this distribution is a small script called
-version.pl, which was the beginning of everything.
 
 =head1 SUBROUTINES/METHODS
 
@@ -153,8 +150,8 @@ the object:
 So by using the inherited methods from B<Module::Info> you can access
 the attributes.
 
-There is an example in the bin/ folder called version.pl, this script
-was the starting point for this module.
+In the F<script> folder in this distribution is a small script called
+F<version.pl>, which was the beginning of this module.
 
 =over 4
 
