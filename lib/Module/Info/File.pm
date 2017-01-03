@@ -125,7 +125,22 @@ to extract certain data when parsing a module directly from a file. I
 have therefor created Module::Info::File, which inherits from
 Module::Info and replaces the B<new_from_file> method so the lacking
 data can be accessed (dir and name attributes). Apart from that you can
-use all the neat accessors from Module::Info.
+use all the neat accessors from B<Module::Info>.
+
+Given the following structure in a file:
+
+    package Foo;
+    1;
+    package Bar;
+    1;
+
+B<Module::Info::File> returns: Foo
+
+Given the following structure in a file:
+
+    package Foo;
+    $VERSION = '0.01';
+    1;
 
 =head1 SUBROUTINES/METHODS
 
@@ -169,7 +184,6 @@ F<version.pl>, which was the beginning of this module.
 =head2 new_from_data
 
 A helper method to streamline the result set
-
 
 In general please refer to the documentation on B<Module::Info> for more
 details.
