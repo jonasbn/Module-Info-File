@@ -285,6 +285,10 @@ In no particular order
 
 =item *
 
+Dai Okabayashi (bayashi), for PRs #2 and #3
+
+=item *
+
 Jeffrey Ryan Thalhammer, for L<Perl::Critic>
 
 =item *
