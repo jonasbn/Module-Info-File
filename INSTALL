@@ -1,7 +1,5 @@
 INSTALL file for Module-Info-File
 
-$Id: INSTALL 1254 2004-02-28 14:07:42Z jonasbn $
-
 The installation of Module-Info-File is pretty straightforward, this
 requires superuser priviledges and will install Module-Info-File in the
 appropriate directory. 

@@ -1,7 +1,5 @@
 #!/usr/bin/perl -w
 
-# $Id: File.t 1603 2005-12-03 17:46:12Z jonasbn $
-
 use strict;
 use Data::Dumper;
 use Test::More tests => 13;

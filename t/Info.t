@@ -1,7 +1,5 @@
 #!/usr/bin/perl -w
 
-# $Id: Info.t 1697 2007-02-12 11:52:41Z jonasbn $
-
 use strict;
 use Data::Dumper;
 use Test::More tests => 6;
