@@ -332,7 +332,7 @@ jonasbn E<lt>jonasbn@cpan.orgE<gt>
 Module::Info::File and related modules are free software and is
 released under the Artistic License 2.0.
 
-Module::Info::File is (C) 2003-2014 Jonas B. Nielsen (jonasbn)
+Module::Info::File is (C) 2003-2017 Jonas B. Nielsen (jonasbn)
 E<lt>jonasbn@cpan.orgE<gt>
 
 =cut
