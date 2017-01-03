@@ -20,7 +20,8 @@ sub new_from_file {
         if ( !$name && $_ =~ m/\bpackage\s?([A-Za-z0-9_:]+);/xm ) {
             if ($1) {
                 $name = $1;
-            } else {
+            }
+            else {
                 ($name) = $file =~ m/(\w+\.pm)$/xm;
             }
         }
@@ -75,7 +76,8 @@ sub version {
 
     if ( $self->{version} ) {
         return $self->{version};
-    } else {
+    }
+    else {
         return $self->SUPER::version();
     }
 }
