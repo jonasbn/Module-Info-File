@@ -192,7 +192,7 @@ Module::Info::File will be obsolete and can be discontinued.
 
 =item * Module::Info, by Mattia Barbon
 
-=item * bin/version.pl
+=item * F<script/version.pl>
 
 =back
 
@@ -230,7 +230,7 @@ for further information on this issue, regarding his version and installation.
 
 =over
 
-=item * Unable to open file: <filename> - <operating system error>
+=item * C<< Unable to open file: <filename> - <operating system error> >>
 
 If the constructor B<new_from_file> is given a filename parameter, which does
 not meet the following prerequisites:
