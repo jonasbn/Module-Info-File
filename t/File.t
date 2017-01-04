@@ -6,7 +6,7 @@ use Test::More tests => 13;
 use File::Basename;
 use lib qw(lib);
 
-my $verbose = 0;
+use Env qw($TEST_VERBOSE);
 
 #test 1
 BEGIN { use_ok('Module::Info::File'); }
