@@ -25,24 +25,24 @@ can_ok($mod, qw(new_from_module new_from_loaded));
 
 #test 4
 is($mod->name, 'Module::Info::File', 'Testing the name');
-print STDERR "Name = ".$mod->name."\n" if $verbose;
+diag "Name = ".$mod->name."\n" if $TEST_VERBOSE;
 
 #test 5
 like($mod->version, qr/^\d+\.\d+$/, 'Testing the version'); 
-print STDERR "Version = ".$mod->version."\n" if $verbose;
+diag "Version = ".$mod->version."\n" if $TEST_VERBOSE;
 
 #test 6
 my ($name,$v,$suffix) = fileparse($path,"\.pm");
 fileparse_set_fstype($^O);
 
 like($mod->file, qr/$name$suffix/, 'Testing the file');
-print STDERR "File = ".$mod->file."\n" if $verbose;
+diag "File = ".$mod->file."\n" if $TEST_VERBOSE;
 
 #test 7
 like($mod->inc_dir, qr/\w+/, 'Testing the dir');
-print STDERR "Dir = ".$mod->inc_dir."\n" if $verbose;
+diag "Dir = ".$mod->inc_dir."\n" if $TEST_VERBOSE;
 
-print STDERR Dumper $mod if $verbose;
+diag Dumper $mod if $TEST_VERBOSE;
 
 #test 8
 $path = 'lib/Module/Info/File.pm';
@@ -62,6 +62,6 @@ is(scalar @mods, 1, 'Testing the count of values returned on list context');
 	}
 }
 
-print STDERR Dumper \@mods if $verbose;
+diag Dumper \@mods if $TEST_VERBOSE;
 
 exit(0);
