@@ -8,7 +8,7 @@ Module::Info::File - retrieve module information from a file
 
 # VERSION
 
-This POD describes version 0.13 of Module::Info::File
+This POD describes version 1.00 of Module::Info::File
 
 # SYNOPSIS
 
@@ -16,25 +16,37 @@ This POD describes version 0.13 of Module::Info::File
 
         my $module = Module::Info::File->new_from_file('path/to/Some/Module.pm');
 
-        $mod->name();
+        $module->name();
 
-        $mod->version();
+        $module->version();
 
-        $mod->file();
+        $module->file();
 
-        $mod->inc_dir();
+        $module->inc_dir();
 
 # DESCRIPTION
 
-Module::Info (SEE REFERENCES), are lacking functionality of being able
+**Module::Info** (SEE REFERENCES), are lacking functionality of being able
 to extract certain data when parsing a module directly from a file. I
 have therefor created Module::Info::File, which inherits from
-Module::Info and replaces the __new\_from\_file__ method so the lacking
+Module::Info and replaces the **new\_from\_file** method so the lacking
 data can be accessed (dir and name attributes). Apart from that you can
-use all the neat accessors from Module::Info.
+use all the neat accessors from **Module::Info**.
 
-In the bin folder in this distribution is a small script called
-version.pl, which was the beginning of everything.
+Given the following structure in a file:
+
+    package Foo;
+    1;
+    package Bar;
+    1;
+
+**Module::Info::File** returns: Foo
+
+Given the following structure in a file:
+
+    package Foo;
+    $VERSION = '0.01';
+    1;
 
 # SUBROUTINES/METHODS
 
@@ -50,11 +62,11 @@ the object:
 - dir
 - file
 
-So by using the inherited methods from __Module::Info__ you can access
+So by using the inherited methods from **Module::Info** you can access
 the attributes.
 
-There is an example in the bin/ folder called version.pl, this script
-was the starting point for this module.
+In the `script` folder in this distribution is a small script called
+`version.pl`, which was the beginning of this module.
 
 - name, returns the package name of the file.
 - version, returns the version number of the module/file in question
@@ -66,7 +78,7 @@ was the starting point for this module.
 
 A helper method to streamline the result set
 
-In general please refer to the documentation on __Module::Info__ for more
+In general please refer to the documentation on **Module::Info** for more
 details.
 
 In list context the module returns and array of Module::Info::File objects, with
@@ -81,7 +93,7 @@ Module::Info::File will be obsolete and can be discontinued.
 # SEE ALSO
 
 - Module::Info, by Mattia Barbon
-- bin/version.pl
+- `script/version.pl`
 
 # BUGS AND LIMITATIONS
 
@@ -109,9 +121,9 @@ for further information on this issue, regarding his version and installation.
 
 # DIAGNOSTICS
 
-- Unable to open file: <filename> - <operating system error>
+- `Unable to open file: <filename> - <operating system error>`
 
-    If the constructor __new\_from\_file__ is given a filename parameter, which does
+    If the constructor **new\_from\_file** is given a filename parameter, which does
     not meet the following prerequisites:
 
     - it must be a file and it must exist
@@ -134,15 +146,11 @@ dependencies have to be met:
     Compability for older perls is no longer required, if somebody would
     require this I would be willing to invest the time and effort.
 
-# TODO
-
-- Use PPI for parsing instead of own parsing mechanisms or it this serious
-overkill?
-
 # ACKNOWLEDGEMENTS
 
 In no particular order
 
+- Dai Okabayashi (bayashi), for PRs #2 and #3
 - Jeffrey Ryan Thalhammer, for [Perl::Critic](https://metacpan.org/pod/Perl::Critic)
 - chromatic, for [Test::Kwalitee](https://metacpan.org/pod/Test::Kwalitee)
 - Eric D. Peterson, for reporting bugs resulting in an improvement
@@ -163,5 +171,5 @@ jonasbn <jonasbn@cpan.org>
 Module::Info::File and related modules are free software and is
 released under the Artistic License 2.0.
 
-Module::Info::File is (C) 2003-2014 Jonas B. Nielsen (jonasbn)
+Module::Info::File is (C) 2003-2017 Jonas B. Nielsen (jonasbn)
 <jonasbn@cpan.org>
