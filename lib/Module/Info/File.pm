@@ -7,6 +7,7 @@ use Carp;
 use File::Basename; # fileparse
 use vars qw($VERSION);
 use Module::Metadata;
+use Try::Tiny; # try catch
 
 $VERSION = '1.00';
 
@@ -52,13 +53,17 @@ sub version {
         return $self->{version};
     }
     else {
-        my $version = $self->SUPER::version();
+        try {
+            my $version = $self->SUPER::version();
 
-        if ($version) {
-            return $version;
-        } else {
+            if ($version) {
+                return $version;
+            } else {
+                return undef;
+            }
+        } catch {
             return undef;
-        }
+        };
     }
 }
 
