@@ -2,7 +2,7 @@
 
 use strict;
 use Data::Dumper;
-use Test::More tests => 6;
+use Test::More;
 use File::Basename;
 use lib qw(lib);
 
@@ -54,3 +54,4 @@ be discontinued, please inform the author at jonasbn\@cpan.org and include the i
 
 diag Dumper $module if $TEST_VERBOSE;
 
+done_testing();

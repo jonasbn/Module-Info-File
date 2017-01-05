@@ -2,7 +2,7 @@
 
 use strict;
 use Data::Dumper;
-use Test::More tests => 13;
+use Test::More;
 use File::Basename;
 use lib qw(lib);
 
@@ -12,47 +12,47 @@ use Env qw($TEST_VERBOSE);
 BEGIN { use_ok('Module::Info::File'); }
 
 my $path = 'lib/Module/Info/File.pm';
-my $mod = Module::Info::File->new_from_file($path);
+my $module = Module::Info::File->new_from_file($path);
 
 #test 2
-isa_ok($mod, 'Module::Info::File');
+isa_ok($module, 'Module::Info::File');
 
 #test 3
-isa_ok($mod, 'Module::Info');
+isa_ok($module, 'Module::Info');
 
 #test 4
-can_ok($mod, qw(new_from_module new_from_loaded));
+can_ok($module, qw(new_from_module new_from_loaded));
 
 #test 4
-is($mod->name, 'Module::Info::File', 'Testing the name');
-diag "Name = ".$mod->name."\n" if $TEST_VERBOSE;
+is($module->name, 'Module::Info::File', 'Testing the name');
+diag "Name = ".$module->name."\n" if $TEST_VERBOSE;
 
 #test 5
-like($mod->version, qr/^\d+\.\d+$/, 'Testing the version'); 
-diag "Version = ".$mod->version."\n" if $TEST_VERBOSE;
+like($module->version, qr/^\d+\.\d+$/, 'Testing the version'); 
+diag "Version = ".$module->version."\n" if $TEST_VERBOSE;
 
 #test 6
 my ($name,$v,$suffix) = fileparse($path,"\.pm");
 fileparse_set_fstype($^O);
 
-like($mod->file, qr/$name$suffix/, 'Testing the file');
-diag "File = ".$mod->file."\n" if $TEST_VERBOSE;
+like($module->file, qr/$name$suffix/, 'Testing the file');
+diag "File = ".$module->file."\n" if $TEST_VERBOSE;
 
 #test 7
-like($mod->inc_dir, qr/\w+/, 'Testing the dir');
-diag "Dir = ".$mod->inc_dir."\n" if $TEST_VERBOSE;
+like($module->inc_dir, qr/\w+/, 'Testing the dir');
+diag "Dir = ".$module->inc_dir."\n" if $TEST_VERBOSE;
 
-diag Dumper $mod if $TEST_VERBOSE;
+diag Dumper $module if $TEST_VERBOSE;
 
 #test 8
 $path = 'lib/Module/Info/File.pm';
-my @mods = Module::Info::File->new_from_file($path);
+my @modules = Module::Info::File->new_from_file($path);
 
-is(scalar @mods, 1, 'Testing the count of values returned on list context');
+is(scalar @modules, 1, 'Testing the count of values returned on list context');
 
 #test 9-12
 {
-	foreach my $m (@mods) {
+	foreach my $m (@modules) {
 		like($m->name, qr/\w+/, 'Testing the name');
 		like($m->version, qr/\d+\.\d+/, 'Testing the version');
 		like($m->inc_dir, qr/\w+/, 'Testing the dir');
@@ -62,6 +62,6 @@ is(scalar @mods, 1, 'Testing the count of values returned on list context');
 	}
 }
 
-diag Dumper \@mods if $TEST_VERBOSE;
+diag Dumper \@modules if $TEST_VERBOSE;
 
-exit(0);
+done_testing();
