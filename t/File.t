@@ -82,4 +82,23 @@ diag Dumper $module if $TEST_VERBOSE;
     diag Dumper \@modules if $TEST_VERBOSE;
 }
 
+{
+    my $path = 't/lib/Baz.pm';
+    my @modules = Module::Info::File->new_from_file($path);
+
+    is(scalar @modules, 1, 'Testing the count of values returned on list context');
+
+    #test 9-12
+    foreach my $m (@modules) {
+        like($m->name, qr/Baz/, 'Testing the name');
+        is($m->version, undef, 'Testing the version');
+        like($m->inc_dir, qr/\w+/, 'Testing the dir');
+        my ($name,$v,$suffix) = fileparse($path,"\.pm");
+        fileparse_set_fstype($^O);
+        like($m->file, qr/$name$suffix/, 'Testing the file');
+    }
+
+    diag Dumper \@modules if $TEST_VERBOSE;
+}
+
 done_testing();
