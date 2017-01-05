@@ -88,6 +88,13 @@ diag Dumper $module if $TEST_VERBOSE;
     }
 
     diag Dumper \@modules if $TEST_VERBOSE;
+
+    my $module = Module::Info::File->new_from_file($path);
+    is($module->version, undef, 'Testing the version');
+
+    ok($module->version('0.01'), 'Testing the version accessor');
+
+    is($module->version, '0.01', 'Testing the version');
 }
 
 done_testing();
