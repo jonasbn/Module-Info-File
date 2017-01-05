@@ -42,6 +42,9 @@ sub new_from_file {
     }
     close $file;
 
+    use Data::Dumper;
+    print STDERR "DIR: ", Dumper $dir;
+
     return __PACKAGE__->new_from_data(
         name    => $name,
         dir     => $dir,
