@@ -54,13 +54,8 @@ sub version {
     }
     else {
         try {
-            my $version = $self->SUPER::version();
+            return $self->SUPER::version();
 
-            if ($version) {
-                return $version;
-            } else {
-                return undef;
-            }
         } catch {
             return undef;
         };
