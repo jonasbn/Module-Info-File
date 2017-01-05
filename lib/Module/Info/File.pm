@@ -87,7 +87,7 @@ Module::Info::File - retrieve module information from a file
 
 =head1 VERSION
 
-This POD describes version 0.13 of Module::Info::File
+This POD describes version 1.00 of Module::Info::File
 
 =head1 SYNOPSIS
 

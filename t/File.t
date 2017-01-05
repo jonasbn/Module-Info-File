@@ -73,7 +73,7 @@ diag Dumper $module if $TEST_VERBOSE;
     foreach my $m (@modules) {
         like($m->name, qr/Foo/, 'Testing the name');
         like($m->version, qr/\d+\.\d+/, 'Testing the version');
-        like($m->inc_dir, qr/\w+/, 'Testing the dir');
+        is($m->inc_dir, 't/lib/', 'Testing the directory');
         my ($name,$v,$suffix) = fileparse($path,"\.pm");
         fileparse_set_fstype($^O);
         like($m->file, qr/$name$suffix/, 'Testing the file');
@@ -92,7 +92,7 @@ diag Dumper $module if $TEST_VERBOSE;
     foreach my $m (@modules) {
         like($m->name, qr/Baz/, 'Testing the name');
         is($m->version, undef, 'Testing the version');
-        like($m->inc_dir, qr/\w+/, 'Testing the dir');
+        is($m->inc_dir, 't/lib/', 'Testing the directory');
         my ($name,$v,$suffix) = fileparse($path,"\.pm");
         fileparse_set_fstype($^O);
         like($m->file, qr/$name$suffix/, 'Testing the file');
