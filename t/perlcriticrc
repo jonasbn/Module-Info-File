@@ -11,3 +11,5 @@ script_sections = NAME|DESCRIPTION|SYNOPSIS|AUTHOR|COPYRIGHT
 
 [CodeLayout::ProhibitHardTabs]
 allow_leading_tabs = 0
+
+[-Subroutines::ProhibitExplicitReturnUndef]
