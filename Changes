@@ -1,12 +1,16 @@
 Changes file for Module::Info::File
 
-0.15 2016-01-03 bug fix release, update recommended
+0.15 2016-01-05 bug fix release, update recommended
 
-WARNING! this release fixes a bug for multiple package definitions for a file.
-It now returns the first package encountered instead of the package definition encountered, 
-this alters behaviour, but the behaviour seems more correct.
+- Removed unused variable PR #3
 
-Thanks to Dai Okabayashi for PRs #2 and #3
+- Increasing performance, but stopping after first package defintion discovery, PR #2
+
+  WARNING! this release fixes a bug for multiple package definitions for a file.
+  It now returns the first package encountered instead of the package definition encountered, 
+  this alters behaviour, but the behaviour seems more correct.
+
+  Thanks to Dai Okabayashi for PRs #2 and #3
 
 
 0.14 2014-08-27 bug fix release, update not necessary
