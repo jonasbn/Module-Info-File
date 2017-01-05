@@ -2,8 +2,6 @@ TODO file for Module::Info::File
 
 [ ] Reimplement list context from version 0.07, which was removed in 0.08
 
-[ ] Should we use [Test::Version](https://metacpan.org/pod/Test::Version) to retrieve `VERSION`?
-
 [ ] Have a look at test coverage, this is the current state and it does not
   make sense:
 

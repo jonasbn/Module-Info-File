@@ -4,52 +4,23 @@ use strict;
 use warnings;
 use base 'Module::Info';
 use Carp;
-use File::Spec;
+use File::Basename; # fileparse
 use vars qw($VERSION);
+use Module::Metadata;
 
-$VERSION = '0.14';
+$VERSION = '1.00';
 
 sub new_from_file {
-    my ( $proto, $filename ) = @_;
+    my ( $proto, $filepath ) = @_;
 
-    open my $file, '<', $filename
-        or croak "Unable to open file: $filename - $!";
-
-    my ( @packages, $version, $name, $dir );
-    while (<$file>) {
-        if ( !$name && $_ =~ m/\bpackage\s?([A-Za-z0-9_:]+);/xm ) {
-            if ($1) {
-                $name = $1;
-            }
-            else {
-                ($name) = $file =~ m/(\w+\.pm)$/xm;
-            }
-        }
-
-        unless ($dir) {
-            $dir = File::Spec->rel2abs($file);
-            $dir =~ s[/(\w+\.p(m|l))$][]xm;
-        }
-
-        if ( !$version && $_ =~ m/\bVERSION\b\s*=\s*'([0-9_.]+)'*;/xm ) {
-            $version = $1;
-        }
-
-        if ( $name and $dir and $filename and $version ) {
-            last;
-        }
-
-    }
-    close $file;
-
-    use Data::Dumper;
-    print STDERR "DIR: ", Dumper $dir;
+    my $info = Module::Metadata->new_from_file($filepath);
+    my ($filename, $dir, $suffix) = fileparse($filepath);
 
     return __PACKAGE__->new_from_data(
-        name    => $name,
+        name    => $info->name,
         dir     => $dir,
         file    => $filename,
-        version => $version ? $version : undef,
+        version => $info->version,
     );
 }
 

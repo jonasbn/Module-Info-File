@@ -3,7 +3,7 @@
 use strict;
 use Data::Dumper;
 use Test::More;
-use File::Basename;
+use File::Basename; # fileparse
 
 use Env qw($TEST_VERBOSE);
 
