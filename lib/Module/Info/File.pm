@@ -253,15 +253,6 @@ require this I would be willing to invest the time and effort.
 
 =back
 
-=head1 TODO
-
-=over
-
-=item * Use PPI for parsing instead of own parsing mechanisms or it this serious
-overkill?
-
-=back
-
 =head1 ACKNOWLEDGEMENTS
 
 In no particular order
