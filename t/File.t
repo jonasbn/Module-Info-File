@@ -4,7 +4,6 @@ use strict;
 use Data::Dumper;
 use Test::More;
 use File::Basename;
-use lib qw(lib);
 
 use Env qw($TEST_VERBOSE);
 
