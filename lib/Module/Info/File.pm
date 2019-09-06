@@ -181,7 +181,7 @@ Module::Info::File will be obsolete and can be discontinued.
 
 =over 4
 
-=item * Module::Info, by Mattia Barbon
+=item * L<Module::Info>, by Mattia Barbon
 
 =item * F<script/version.pl>
 
