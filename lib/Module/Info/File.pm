@@ -9,7 +9,7 @@ use vars qw($VERSION);
 use Module::Metadata;
 use Try::Tiny; # try catch
 
-$VERSION = '1.00';
+$VERSION = '1.01';
 
 sub new_from_file {
     my ( $proto, $filepath ) = @_;
@@ -264,6 +264,10 @@ require this I would be willing to invest the time and effort.
 In no particular order
 
 =over 4
+
+=item *
+
+Mohammad S Anwar, for PRs #6
 
 =item *
 
