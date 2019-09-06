@@ -92,7 +92,7 @@ Module::Info::File will be obsolete and can be discontinued.
 
 # SEE ALSO
 
-- Module::Info, by Mattia Barbon
+- [Module::Info](https://metacpan.org/pod/Module::Info), by Mattia Barbon
 - `script/version.pl`
 
 # BUGS AND LIMITATIONS
@@ -150,6 +150,7 @@ dependencies have to be met:
 
 In no particular order
 
+- Mohammad S Anwar, for PRs #6
 - Dai Okabayashi (bayashi), for PRs #2 and #3
 - Jeffrey Ryan Thalhammer, for [Perl::Critic](https://metacpan.org/pod/Perl::Critic)
 - chromatic, for [Test::Kwalitee](https://metacpan.org/pod/Test::Kwalitee)
